@@ -1,5 +1,9 @@
-node[:deploy].each do |application, deploy|
-	app_root = "#{deploy[:deploy_to]}/current/wp-content/uploads"
-	execute "chmod -R g+rw #{app_root}" do
+[ "/srv/www/dev_cm_lifestyle/current/wp-content/uploads" ].each do |path|
+	directory path do
+		mode 0775
+		owner 'deploy'
+		group 'www-data'
+		recursive true
+		action :create
 	end
 end
